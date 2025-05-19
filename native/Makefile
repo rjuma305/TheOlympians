@@ -4,11 +4,11 @@ TARGETS=distance path_length
 
 all: $(TARGETS)
 
-# build distance
+# Build distance
 distance: distance.c
 	$(CC) $(CFLAGS) -o $@ $< -lm
 
-# build path_length
+# Build path_length
 path_length: path_length.c
 	$(CC) $(CFLAGS) -o $@ $< -lm
 
