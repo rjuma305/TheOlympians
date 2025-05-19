@@ -134,3 +134,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Native C build artifacts
+/native/distance
+/native/path_length
+/native/*.o
+
