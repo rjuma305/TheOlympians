@@ -17,19 +17,47 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.add.existing(this);
     this.setDepth(1);
 
-    // Movement (basic: left to right)
-    this.setVelocityX(this.speed);
+    // Path data
+    this.path = null;
+    this.pathIndex = 0;
 
     // Health bar UI (optional now)
     this.healthBar = this.scene.add.graphics();
     this.updateHealthBar();
   }
 
+  setPath(path) {
+    this.path = path;
+    this.pathIndex = 0;
+    this.moveToNextPoint();
+  }
+
+  moveToNextPoint() {
+    if (!this.path || this.pathIndex >= this.path.length) {
+      this.reachEnd();
+      return;
+    }
+    const point = this.path[this.pathIndex];
+    this.scene.physics.moveTo(this, point.x, point.y, this.speed);
+  }
+
+  reachEnd() {
+    this.healthBar.destroy();
+    this.destroy();
+    this.emit('escape');
+  }
+
   update(time, delta) {
     // Update health bar position
     this.updateHealthBar();
-
-    // You can add path logic here later
+    if (this.path) {
+      const point = this.path[this.pathIndex];
+      const dist = Phaser.Math.Distance.Between(this.x, this.y, point.x, point.y);
+      if (dist < 5) {
+        this.pathIndex++;
+        this.moveToNextPoint();
+      }
+    }
   }
 
   takeDamage(amount, element = null) {

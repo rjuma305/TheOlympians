@@ -1,5 +1,7 @@
 // BootScene.js – Initializes the game and prepares PreloadScene
 
+import GameConfig from '../config/GameConfig.js';
+
 export default class BootScene extends Phaser.Scene {
   constructor() {
     super('BootScene');
@@ -7,7 +9,7 @@ export default class BootScene extends Phaser.Scene {
 
   init() {
     // Set up registry values or config flags
-    this.registry.set('favor', 0);
+    this.registry.set('favor', GameConfig.startingFavor);
     this.registry.set('currentWave', 1);
     this.registry.set('unlockedTiers', ['hero']); // unlocked tiers: hero, demigod, olympian
     console.log('%c[BootScene] Game initializing...', 'color: cyan');
