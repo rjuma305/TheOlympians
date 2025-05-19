@@ -3,7 +3,7 @@
 import Enemy from '../objects/Enemy.js';
 import Tower from '../objects/Tower.js';
 import WaveData from '../data/waveData.js';
-import Gods from '../data/gods.js';
+import Gods from '../data/god.js';
 import GameConfig from '../config/GameConfig.js';
 
 export default class GameScene extends Phaser.Scene {
