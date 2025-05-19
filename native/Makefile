@@ -1,11 +1,14 @@
 CC=gcc
 CFLAGS=-O2 -Wall -pedantic
-TARGET=distance
+TARGETS=distance path_length
 
-all: $(TARGET)
+all: $(TARGETS)
 
-$(TARGET): distance.c
-	$(CC) $(CFLAGS) -o $(TARGET) distance.c -lm
+distance: distance.c
+	$(CC) $(CFLAGS) -o distance distance.c -lm
+
+path_length: path_length.c
+	$(CC) $(CFLAGS) -o path_length path_length.c -lm
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGETS)
