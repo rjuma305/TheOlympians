@@ -27,3 +27,20 @@ A recent version of a web browser is all you need. For running a local server, P
 - Wave system with increasing difficulty
 - Additional enemy varieties and bosses
 
+
+## Native Utilities
+
+The `native` directory contains a simple C program demonstrating how a native tool can be used alongside the game. The example `distance` program calculates the distance between two points.
+
+Compile it with:
+
+```bash
+make -C native
+```
+
+Run it with four coordinates:
+
+```bash
+./native/distance 0 0 3 4
+# => 5.000000
+```
