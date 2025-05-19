@@ -5,7 +5,6 @@ import Tower from '../objects/Tower.js';
 import WaveData from '../data/waveData.js';
 import Gods from '../data/gods.js';
 import GameConfig from '../config/GameConfig.js';
-import { getClosestEnemy, canFire } from '../utils/helpers.js';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
