@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
+#include <math.h>
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -9,42 +9,41 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    FILE *f = fopen(argv[1], "r");
-    if (!f) {
-        perror("fopen");
+    FILE *fp = fopen(argv[1], "r");
+    if (!fp) {
+        perror("Failed to open file");
         return 1;
     }
 
     char line[256];
+    double prev_x, prev_y;
     double total = 0.0;
-    double last_x = 0.0, last_y = 0.0;
-    double x, y;
-    int have_last = 0;
+    int has_prev = 0;
 
-    while (fgets(line, sizeof(line), f)) {
-        // Skip empty or malformed lines
-        if (line[0] == '\0' || line[0] == '\n') continue;
+    while (fgets(line, sizeof(line), fp)) {
+        if (line[0] == '\n' || line[0] == '\0')
+            continue;
 
-        // Parse using strtok and fallback to sscanf if needed
-        char *token1 = strtok(line, ",");
-        char *token2 = strtok(NULL, ",\n\r");
-        if (!token1 || !token2) continue;
-
-        x = atof(token1);
-        y = atof(token2);
-
-        if (have_last) {
-            double dx = x - last_x;
-            double dy = y - last_y;
-            total += sqrt(dx * dx + dy * dy);
+        double x, y;
+        if (sscanf(line, "%lf,%lf", &x, &y) != 2) {
+            fprintf(stderr, "Invalid line: %s", line);
+            fclose(fp);
+            return 1;
         }
 
-        last_x = x;
-        last_y = y;
-        have_last = 1;
+        if (has_prev) {
+            double dx = x - prev_x;
+            double dy = y - prev_y;
+            total += sqrt(dx * dx + dy * dy);
+        } else {
+            has_prev = 1;
+        }
+
+        prev_x = x;
+        prev_y = y;
     }
 
-    fclose(f);
+    fclose(fp);
     printf("%f\n", total);
     return 0;
 }
