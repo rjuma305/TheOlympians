@@ -1,4 +1,8 @@
 modules = ["nodejs-20", "c-clang14", "web"]
+run = "npx http-server src"
 
 [nix]
 channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "npx http-server src"]
