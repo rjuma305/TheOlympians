@@ -27,6 +27,59 @@ import GameConfig from '../config/GameConfig.js';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
+
+    // Tower selection UI
+    this.createTowerUI();
+    
+    // Game state
+    this.playerHealth = 100;
+    this.waveInProgress = false;
+    
+    // HUD
+    this.createHUD();
+  }
+
+  createTowerUI() {
+    const y = GameConfig.height - 80;
+    Object.entries(Gods).forEach(([key, god], index) => {
+      const x = 100 + (index * 120);
+      const button = this.add.image(x, y, god.texture)
+        .setInteractive()
+        .setScale(0.8);
+      
+      button.on('pointerdown', () => {
+        this.selectedTower = god;
+      });
+
+      const cost = this.add.text(x, y + 30, god.cost, {
+        fontSize: '16px',
+        fill: '#fff'
+      }).setOrigin(0.5);
+    });
+  }
+
+  createHUD() {
+    this.favorText = this.add.text(16, 16, '', {
+      fontFamily: 'Cinzel',
+      fontSize: '20px',
+      color: '#ffffff'
+    });
+    
+    this.healthText = this.add.text(16, 46, '', {
+      fontFamily: 'Cinzel',
+      fontSize: '20px',
+      color: '#ffffff'
+    });
+    
+    this.waveText = this.add.text(GameConfig.width - 150, 16, '', {
+      fontFamily: 'Cinzel',
+      fontSize: '20px',
+      color: '#ffffff'
+    });
+    
+    this.updateHUD();
+  }
+
     super('GameScene');
   }
 
