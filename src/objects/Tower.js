@@ -93,4 +93,30 @@ export default class Tower extends Phaser.GameObjects.Sprite {
       this.rangeCircle = null;
     }
   }
+
+  showEvolutionUI() {
+    const currentFavor = this.scene.registry.get('favor');
+    const evolutionCost = this.tier === 'hero' ? 
+      GameConfig.evolutionCosts.heroToDemigod : 
+      GameConfig.evolutionCosts.demigodToOlympian;
+
+    if (currentFavor >= evolutionCost && this.tier !== 'olympian') {
+      const evolveButton = this.scene.add.text(this.x, this.y - 60, '⬆ Evolve', {
+        backgroundColor: '#4a4',
+        padding: 8,
+        fontSize: '16px'
+      })
+      .setInteractive()
+      .setOrigin(0.5);
+
+      evolveButton.on('pointerdown', () => {
+        this.evolve();
+        evolveButton.destroy();
+      });
+
+      this.scene.time.delayedCall(2000, () => {
+        evolveButton.destroy();
+      });
+    }
+  }
 }

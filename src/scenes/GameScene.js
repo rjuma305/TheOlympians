@@ -146,7 +146,38 @@ export default class GameScene extends Phaser.Scene {
 
   spawnNextWave() {
     const wave = WaveData[this.currentWave];
-    if (!wave) return;
+    if (!wave) {
+
+  handleVictory() {
+    this.scene.pause();
+    const victoryText = this.add.text(GameConfig.width/2, GameConfig.height/2, 'Victory!\nOlympus is Saved!', {
+      fontSize: '48px',
+      fill: '#fff',
+      align: 'center'
+    }).setOrigin(0.5);
+  }
+
+  handleDefeat() {
+    this.scene.pause();
+    const defeatText = this.add.text(GameConfig.width/2, GameConfig.height/2, 'Defeat!\nOlympus has Fallen!', {
+      fontSize: '48px',
+      fill: '#fff',
+      align: 'center'
+    }).setOrigin(0.5);
+  }
+
+  updatePlayerHealth(damage) {
+    this.playerHealth -= damage;
+    this.healthText.setText(`Health: ${this.playerHealth}`);
+    
+    if (this.playerHealth <= 0) {
+      this.handleDefeat();
+    }
+  }
+
+      this.handleVictory();
+      return;
+    }
 
     this.waveInProgress = true;
 

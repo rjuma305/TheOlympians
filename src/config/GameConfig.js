@@ -5,6 +5,17 @@ const GameConfig = {
   width: 1024,
   height: 768,
   backgroundColor: '#1a1a40',
+
+  // Game State
+  playerStartingHealth: 100,
+  startingFavor: 150,
+  victoryWave: 10,
+  
+  // Tower Evolution
+  evolutionCosts: {
+    heroToDemigod: 300,
+    demigodToOlympian: 600
+  },
   
   // Evolution costs
   evolutionCosts: {
