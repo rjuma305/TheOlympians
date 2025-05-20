@@ -1,23 +1,4 @@
-<<<<<<< HEAD
-// GameScene.js – First scene test for Wrath of the 12 Olympians
-
-export default class GameScene extends Phaser.Scene {
-  constructor() {
-    super('GameScene');
-  }
-
-  create() {
-    // Show Aphrodite in the center of the screen
-    this.add.image(512, 384, 'aphrodite');
-  }
-
-  update() {
-    // Empty for now — we’ll use this later for game logic
-  }
-}
-=======
 // GameScene.js – Main gameplay loop for Wrath of the 12 Olympians
->>>>>>> 38c3759604c30726b0dd6dc289d040004e1e93b5
 
 import Enemy from '../objects/Enemy.js';
 import Tower from '../objects/Tower.js';
@@ -27,14 +8,15 @@ import GameConfig from '../config/GameConfig.js';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
+    super('GameScene');
 
     // Tower selection UI
     this.createTowerUI();
-    
+
     // Game state
     this.playerHealth = 100;
     this.waveInProgress = false;
-    
+
     // HUD
     this.createHUD();
   }
@@ -80,8 +62,6 @@ export default class GameScene extends Phaser.Scene {
     this.updateHUD();
   }
 
-    super('GameScene');
-  }
 
   create() {
     // Background
@@ -147,34 +127,6 @@ export default class GameScene extends Phaser.Scene {
   spawnNextWave() {
     const wave = WaveData[this.currentWave];
     if (!wave) {
-
-  handleVictory() {
-    this.scene.pause();
-    const victoryText = this.add.text(GameConfig.width/2, GameConfig.height/2, 'Victory!\nOlympus is Saved!', {
-      fontSize: '48px',
-      fill: '#fff',
-      align: 'center'
-    }).setOrigin(0.5);
-  }
-
-  handleDefeat() {
-    this.scene.pause();
-    const defeatText = this.add.text(GameConfig.width/2, GameConfig.height/2, 'Defeat!\nOlympus has Fallen!', {
-      fontSize: '48px',
-      fill: '#fff',
-      align: 'center'
-    }).setOrigin(0.5);
-  }
-
-  updatePlayerHealth(damage) {
-    this.playerHealth -= damage;
-    this.healthText.setText(`Health: ${this.playerHealth}`);
-    
-    if (this.playerHealth <= 0) {
-      this.handleDefeat();
-    }
-  }
-
       this.handleVictory();
       return;
     }
@@ -205,6 +157,33 @@ export default class GameScene extends Phaser.Scene {
     this.time.delayedCall(1000 * wave.enemies.length + 1000, () => {
       this.waveInProgress = false;
     });
+  }
+
+  handleVictory() {
+    this.scene.pause();
+    const victoryText = this.add.text(GameConfig.width/2, GameConfig.height/2, 'Victory!\nOlympus is Saved!', {
+      fontSize: '48px',
+      fill: '#fff',
+      align: 'center'
+    }).setOrigin(0.5);
+  }
+
+  handleDefeat() {
+    this.scene.pause();
+    const defeatText = this.add.text(GameConfig.width/2, GameConfig.height/2, 'Defeat!\nOlympus has Fallen!', {
+      fontSize: '48px',
+      fill: '#fff',
+      align: 'center'
+    }).setOrigin(0.5);
+  }
+
+  updatePlayerHealth(damage) {
+    this.playerHealth -= damage;
+    this.healthText.setText(`Health: ${this.playerHealth}`);
+
+    if (this.playerHealth <= 0) {
+      this.handleDefeat();
+    }
   }
 
   updateHUD() {
