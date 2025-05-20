@@ -5,6 +5,18 @@ const GameConfig = {
   width: 1024,
   height: 768,
   backgroundColor: '#1a1a40',
+  
+  // Evolution costs
+  evolutionCosts: {
+    heroToDemigod: 500,
+    demigodToOlympian: 1000
+  },
+  
+  // Base stats multipliers for evolution
+  evolutionMultipliers: {
+    demigod: 1.5,
+    olympian: 2.5
+  },
 
   // Game Settings
   startingFavor: 100,
