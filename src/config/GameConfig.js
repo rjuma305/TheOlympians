@@ -6,6 +6,29 @@ const GameConfig = {
   height: 768,
   backgroundColor: '#1a1a40',
 
+  // Game State
+  playerStartingHealth: 100,
+  startingFavor: 150,
+  victoryWave: 10,
+  
+  // Tower Evolution
+  evolutionCosts: {
+    heroToDemigod: 300,
+    demigodToOlympian: 600
+  },
+  
+  // Evolution costs
+  evolutionCosts: {
+    heroToDemigod: 500,
+    demigodToOlympian: 1000
+  },
+  
+  // Base stats multipliers for evolution
+  evolutionMultipliers: {
+    demigod: 1.5,
+    olympian: 2.5
+  },
+
   // Game Settings
   startingFavor: 100,
   maxTowers: 20,

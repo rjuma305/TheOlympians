@@ -1,43 +1,49 @@
-// gods.js – Tower definitions for Wrath of the 12 Olympians
 
 const Gods = {
-  zeus: {
-    name: 'Zeus',
-    tier: 'olympian',
-    element: 'lightning',
-    cost: 300,
-    damage: 50,
-    range: 220,
+  perseus: {
+    name: 'Perseus',
+    tier: 'hero',
+    element: 'sword',
+    cost: 100,
+    damage: 30,
+    range: 150,
+    fireRate: 800,
+    texture: 'perseus',
+    description: 'A legendary hero wielding divine weapons.',
+    evolution: {
+      demigod: 'heracles',
+      olympian: 'ares'
+    }
+  },
+  orpheus: {
+    name: 'Orpheus',
+    tier: 'hero',
+    element: 'music',
+    cost: 120,
+    damage: 20,
+    range: 200,
     fireRate: 600,
-    texture: 'zeus',
-    description: 'Unleashes chain lightning that arcs between nearby enemies.',
-    special: 'Chain Lightning (hits 3 targets)'
+    texture: 'orpheus',
+    description: 'Enchants enemies with divine music.',
+    evolution: {
+      demigod: 'dionysus',
+      olympian: 'apollo'
+    }
   },
-
-  artemis: {
-    name: 'Artemis',
-    tier: 'olympian',
-    element: 'nature',
-    cost: 280,
-    damage: 45,
-    range: 260,
-    fireRate: 700,
-    texture: 'artemis',
-    description: 'A deadly huntress. Fires long-range arrows with pinpoint accuracy.',
-    special: 'Critical Arrow (chance to double damage)'
-  },
-
-  hephaestus: {
-    name: 'Hephaestus',
-    tier: 'olympian',
-    element: 'fire',
-    cost: 320,
+  achilles: {
+    name: 'Achilles',
+    tier: 'hero',
+    element: 'spear',
+    cost: 150,
     damage: 40,
-    range: 180,
+    range: 130,
     fireRate: 900,
-    texture: 'hephaestus',
-    description: 'Master of the forge. Launches molten blasts that burn enemies over time.',
-    special: 'Burning Ground (DoT AoE)'
+    texture: 'achilles',
+    description: 'Nearly invincible warrior of Troy.',
+    evolution: {
+      demigod: 'hermes',
+      olympian: 'athena'
+    }
   },
 
   aphrodite: {
@@ -52,6 +58,3 @@ const Gods = {
     description: 'Fires heart-shaped charm projectiles that slow enemies.',
     special: 'Charmed enemies move 50% slower'
   }
-};
-
-export default Gods;

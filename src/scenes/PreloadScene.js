@@ -43,22 +43,20 @@ export default class PreloadScene extends Phaser.Scene {
     const SPRITE_ROOT = '../assets/sprites/';
     this.load.image('zeus',      `${SPRITE_ROOT}zeus.png`);
     this.load.image('artemis',   `${SPRITE_ROOT}artemis.png`);
-        this.load.image('aphrodite', `${SPRITE_ROOT}aphrodite.png`);
     this.load.image('hephaestus',`${SPRITE_ROOT}hephaestus.png`);
     this.load.image('aphrodite', `${SPRITE_ROOT}aphrodite.png`);
 
     // Projectiles
-        this.load.image('heart', '../assets/projectiles/heart.png');
+    this.load.image('heart', '../assets/projectiles/heart.png');
     this.load.image('lightning_bolt', '../assets/projectiles/lightning_bolt.png');
     this.load.image('arrow', '../assets/projectiles/arrow.png');
     this.load.image('glow_circle', '../assets/effects/glow_circle.png');
-    this.load.image('heart', '../assets/projectiles/heart.png');
 
     // Enemies
-    this.load.image('harpy', '../assets/sprites/harpy.png');
-    this.load.image('satyr', '../assets/sprites/satyr.png');
-    this.load.image('cyclops', '../assets/sprites/cyclops.png');
-    this.load.image('kampe', '../assets/sprites/kampe.png');
+    this.load.image('harpy', '../assets/enemies/harpy.png');
+    this.load.image('satyr', '../assets/enemies/satyr.png');
+    this.load.image('cyclops', '../assets/enemies/cyclops.png');
+    this.load.image('kampe', '../assets/enemies/kampe.png');
 
     // Background
     this.load.image('background', '../assets/maps/olympus_bg.png');
