@@ -41,16 +41,19 @@ export default class PreloadScene extends Phaser.Scene {
 
     // Towers
     const SPRITE_ROOT = '../assets/sprites/';
-    this.load.image('zeus',      `${SPRITE_ROOT}zeus.png`);
-    this.load.image('artemis',   `${SPRITE_ROOT}artemis.png`);
-    this.load.image('hephaestus',`${SPRITE_ROOT}hephaestus.png`);
-    this.load.image('aphrodite', `${SPRITE_ROOT}aphrodite.png`);
+    this.load.image('zeus',       `${SPRITE_ROOT}zeus.png`);
+    this.load.image('artemis',    `${SPRITE_ROOT}artemis.png`);
+    this.load.image('poseidon',   `${SPRITE_ROOT}poseidon.png`);
+    this.load.image('hephaestus', `${SPRITE_ROOT}hephaestus.png`);
+    this.load.image('aphrodite',  `${SPRITE_ROOT}aphrodite.png`);
 
     // Projectiles
-    this.load.image('heart', '../assets/projectiles/heart.png');
-    this.load.image('lightning_bolt', '../assets/projectiles/lightning_bolt.png');
-    this.load.image('arrow', '../assets/projectiles/arrow.png');
-    this.load.image('glow_circle', '../assets/effects/glow_circle.png');
+    const PROJECTILE_ROOT = '../assets/projectiles/';
+    const PREDEFINED_ROOT = '../assets/predefined/';
+    this.load.image('heart',          `${PREDEFINED_ROOT}heart.png`);
+    this.load.image('lightning_bolt', `${PROJECTILE_ROOT}lightning_bolt.png`);
+    this.load.image('arrow',          `${PROJECTILE_ROOT}arrow.png`);
+    this.load.image('glow_circle',    '../assets/effects/glow_circle.png');
 
     // Enemies
     this.load.image('harpy', '../assets/enemies/harpy.png');

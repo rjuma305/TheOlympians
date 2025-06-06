@@ -58,3 +58,6 @@ const Gods = {
     description: 'Fires heart-shaped charm projectiles that slow enemies.',
     special: 'Charmed enemies move 50% slower'
   }
+};
+
+export default Gods;

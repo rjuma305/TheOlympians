@@ -1,5 +1,7 @@
 // MainMenuScene.js – Welcome screen for Wrath of the 12 Olympians
 
+import AudioManager from '../managers/AudioManager.js';
+
 export default class MainMenuScene extends Phaser.Scene {
   constructor() {
     super('MainMenuScene');
@@ -12,9 +14,7 @@ export default class MainMenuScene extends Phaser.Scene {
   }
 
   create() {
-    // Play background music
-    this.menuMusic = this.sound.add('menu_music', { loop: true, volume: 0.5 });
-    this.menuMusic.play();
+    this.game.audioManager.changeState(AudioManager.STATES.MENU);
 
     // Background image
     this.add.image(512, 384, 'menu_bg');
@@ -38,7 +38,7 @@ export default class MainMenuScene extends Phaser.Scene {
     startButton.on('pointerout', () => startButton.setAlpha(0.9));
 
     startButton.on('pointerdown', () => {
-      this.menuMusic.stop();
+      this.game.audioManager.changeState(AudioManager.STATES.CALM);
       this.scene.start('GameScene');
     });
 
