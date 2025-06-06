@@ -38,6 +38,19 @@ const Gods = {
     texture: 'hephaestus',
     description: 'Master of the forge. Launches molten blasts that burn enemies over time.',
     special: 'Burning Ground (DoT AoE)'
+  },
+
+  aphrodite: {
+    name: 'Aphrodite',
+    tier: 'olympian',
+    element: 'charm',
+    cost: 200,
+    damage: 10,
+    range: 160,
+    fireRate: 800,
+    texture: 'aphrodite',
+    description: 'Fires heart-shaped charm projectiles that slow enemies.',
+    special: 'Charmed enemies move 50% slower'
   }
 };
 

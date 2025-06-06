@@ -1,28 +1,9 @@
-<<<<<<< HEAD
-// GameScene.js – First scene test for Wrath of the 12 Olympians
-
-export default class GameScene extends Phaser.Scene {
-  constructor() {
-    super('GameScene');
-  }
-
-  create() {
-    // Show Aphrodite in the center of the screen
-    this.add.image(512, 384, 'aphrodite');
-  }
-
-  update() {
-    // Empty for now — we’ll use this later for game logic
-  }
-}
-=======
 // GameScene.js – Main gameplay loop for Wrath of the 12 Olympians
->>>>>>> 38c3759604c30726b0dd6dc289d040004e1e93b5
 
 import Enemy from '../objects/Enemy.js';
 import Tower from '../objects/Tower.js';
 import WaveData from '../data/waveData.js';
-import Gods from '../data/god.js';
+import Gods from '../data/gods.js';
 import GameConfig from '../config/GameConfig.js';
 
 export default class GameScene extends Phaser.Scene {
@@ -59,7 +40,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Tower placement
     this.input.on('pointerdown', pointer => {
-      const config = Gods.zeus;
+      const config = Gods.aphrodite; // 👈 You can swap this with Gods.aphrodite when ready
       const favor = this.registry.get('favor');
       if (favor >= config.cost && this.towers.getLength() < GameConfig.maxTowers) {
         const tower = new Tower(this, pointer.worldX, pointer.worldY, config.texture, config);

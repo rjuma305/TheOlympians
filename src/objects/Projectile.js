@@ -43,6 +43,15 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
     // Optional: explosion or hit effect
     this.scene.add.circle(this.x, this.y, 8, 0xffff00).setAlpha(0.6).setBlendMode('ADD');
 
+    if (this.texture.key === 'heart') {
+      this.target.setTint(0xff69b4);
+      this.target.speed *= 0.5;
+      this.scene.time.delayedCall(3000, () => {
+        this.target.clearTint();
+        this.target.speed /= 0.5;
+      });
+    }
+
     this.destroy();
   }
 }
