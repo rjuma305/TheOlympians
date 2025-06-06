@@ -47,10 +47,10 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('aphrodite', `${SPRITE_ROOT}aphrodite.png`);
 
     // Projectiles
+    this.load.image('heart', '../assets/projectiles/heart.png');
     this.load.image('lightning_bolt', '../assets/projectiles/lightning_bolt.png');
     this.load.image('arrow', '../assets/projectiles/arrow.png');
     this.load.image('glow_circle', '../assets/effects/glow_circle.png');
-    this.load.image('heart', '../assets/projectiles/heart.png');
 
     // Enemies
     this.load.image('harpy', '../assets/enemies/harpy.png');
