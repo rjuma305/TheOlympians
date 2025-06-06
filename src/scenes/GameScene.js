@@ -3,7 +3,7 @@
 import Enemy from '../objects/Enemy.js';
 import Tower from '../objects/Tower.js';
 import WaveData from '../data/waveData.js';
-import Gods from '../data/god.js';
+import Gods from '../data/gods.js';
 import GameConfig from '../config/GameConfig.js';
 
 export default class GameScene extends Phaser.Scene {
@@ -92,7 +92,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Tower placement
     this.input.on('pointerdown', pointer => {
-      const config = Gods.zeus;
+      const config = Gods.aphrodite; // 👈 You can swap this with Gods.aphrodite when ready
       const favor = this.registry.get('favor');
       if (favor >= config.cost && this.towers.getLength() < GameConfig.maxTowers) {
         const tower = new Tower(this, pointer.worldX, pointer.worldY, config.texture, config);

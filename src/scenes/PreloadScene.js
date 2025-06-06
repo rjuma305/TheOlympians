@@ -1,5 +1,7 @@
 // PreloadScene.js – Loads assets before MainMenuScene
 
+import AudioManager from '../managers/AudioManager.js';
+
 export default class PreloadScene extends Phaser.Scene {
   constructor() {
     super('PreloadScene');
@@ -38,12 +40,17 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('loading_bg', '../assets/ui/loading_bg.png');
 
     // Towers
-    this.load.image('zeus', '../assets/sprites/zeus.png');
-    this.load.image('artemis', '../assets/sprites/artemis.png');
-    this.load.image('hephaestus', '../assets/sprites/hephaestus.png');
+    const SPRITE_ROOT = '../assets/sprites/';
+    this.load.image('zeus',      `${SPRITE_ROOT}zeus.png`);
+    this.load.image('artemis',   `${SPRITE_ROOT}artemis.png`);
+    this.load.image('hephaestus',`${SPRITE_ROOT}hephaestus.png`);
+    this.load.image('aphrodite', `${SPRITE_ROOT}aphrodite.png`);
 
     // Projectiles
-    this.load.image('projectile', '../assets/projectiles/lightning_bolt.png');
+    this.load.image('heart', '../assets/projectiles/heart.png');
+    this.load.image('lightning_bolt', '../assets/projectiles/lightning_bolt.png');
+    this.load.image('arrow', '../assets/projectiles/arrow.png');
+    this.load.image('glow_circle', '../assets/effects/glow_circle.png');
 
     // Enemies
     this.load.image('harpy', '../assets/enemies/harpy.png');
@@ -57,9 +64,12 @@ export default class PreloadScene extends Phaser.Scene {
     // Audio
     this.load.audio('menu_music', '../assets/audio/menu_music.mp3');
     this.load.audio('zeus_bolt', '../assets/audio/zeus_bolt.wav');
+    // Placeholder combat music (silent loop by default)
+    this.load.audio('combat_music', '../assets/audio/combat_music_placeholder.ogg');
   }
 
   create() {
+    this.audioManager = new AudioManager(this);
     this.scene.start('MainMenuScene');
   }
 }
