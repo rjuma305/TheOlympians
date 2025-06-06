@@ -41,10 +41,11 @@ export default class PreloadScene extends Phaser.Scene {
 
     // Towers
     const SPRITE_ROOT = '../assets/sprites/';
-    this.load.image('zeus',      `${SPRITE_ROOT}zeus.png`);
-    this.load.image('artemis',   `${SPRITE_ROOT}artemis.png`);
-    this.load.image('hephaestus',`${SPRITE_ROOT}hephaestus.png`);
-    this.load.image('aphrodite', `${SPRITE_ROOT}aphrodite.png`);
+    this.load.image('zeus',       `${SPRITE_ROOT}zeus.png`);
+    this.load.image('artemis',    `${SPRITE_ROOT}artemis.png`);
+    this.load.image('poseidon',   `${SPRITE_ROOT}poseidon.png`);
+    this.load.image('hephaestus', `${SPRITE_ROOT}hephaestus.png`);
+    this.load.image('aphrodite',  `${SPRITE_ROOT}aphrodite.png`);
 
     // Projectiles
     const PROJECTILE_ROOT = '../assets/projectiles/';

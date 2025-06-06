@@ -5,6 +5,8 @@ import Tower from '../objects/Tower.js';
 import WaveData from '../data/waveData.js';
 import Gods from '../data/gods.js';
 import GameConfig from '../config/GameConfig.js';
+import GodPowerManager from '../managers/GodPowerManager.js';
+import AudioManager from '../managers/AudioManager.js';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -66,6 +68,31 @@ export default class GameScene extends Phaser.Scene {
   create() {
     // Background
     this.add.image(GameConfig.width / 2, GameConfig.height / 2, 'background');
+    this.godPowerManager = new GodPowerManager(this);
+    this.game.audioManager.changeState(AudioManager.STATES.CALM);
+    const powerY = GameConfig.height - 40;
+    ['zeus_bolt', 'poseidon_wave', 'artemis_barrage'].forEach((key, i) => {
+      const tex = key === 'zeus_bolt' ? 'zeus'
+                : key === 'poseidon_wave' ? 'poseidon'
+                : 'artemis';
+      const icon = this.add.image(80 + i * 64, powerY, tex)
+        .setInteractive()
+        .setScale(0.5);
+
+      icon.on('pointerdown', () => {
+        this.godPowerManager.activatePower(
+          key,
+          { x: this.input.activePointer.worldX, y: this.input.activePointer.worldY }
+        );
+      });
+      icon.keyName = key;
+      icon.update = () => {
+        const now = this.time.now;
+        const cdEnd = this.godPowerManager.cooldowns[key] || 0;
+        icon.setTint(now < cdEnd ? 0x555555 : 0xffffff);
+      };
+      (this.powerIcons || (this.powerIcons = [])).push(icon);
+    });
 
     // Path for enemies
     this.path = [
@@ -108,6 +135,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update(time, delta) {
+    if (this.powerIcons) {
+      this.powerIcons.forEach(icon => icon.update());
+    }
     // Update towers
     this.towers.getChildren().forEach(tower => {
       tower.update(time, delta, this.enemies);
@@ -131,6 +161,7 @@ export default class GameScene extends Phaser.Scene {
       return;
     }
 
+    this.game.audioManager.changeState(AudioManager.STATES.COMBAT);
     this.waveInProgress = true;
 
     wave.enemies.forEach(enemyDef => {
@@ -156,6 +187,7 @@ export default class GameScene extends Phaser.Scene {
     this.currentWave++;
     this.time.delayedCall(1000 * wave.enemies.length + 1000, () => {
       this.waveInProgress = false;
+      this.game.audioManager.changeState(AudioManager.STATES.CALM);
     });
   }
 
