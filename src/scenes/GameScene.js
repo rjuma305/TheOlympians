@@ -9,7 +9,59 @@ import GameConfig from '../config/GameConfig.js';
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('GameScene');
+
+    // Tower selection UI
+    this.createTowerUI();
+
+    // Game state
+    this.playerHealth = 100;
+    this.waveInProgress = false;
+
+    // HUD
+    this.createHUD();
   }
+
+  createTowerUI() {
+    const y = GameConfig.height - 80;
+    Object.entries(Gods).forEach(([key, god], index) => {
+      const x = 100 + (index * 120);
+      const button = this.add.image(x, y, god.texture)
+        .setInteractive()
+        .setScale(0.8);
+      
+      button.on('pointerdown', () => {
+        this.selectedTower = god;
+      });
+
+      const cost = this.add.text(x, y + 30, god.cost, {
+        fontSize: '16px',
+        fill: '#fff'
+      }).setOrigin(0.5);
+    });
+  }
+
+  createHUD() {
+    this.favorText = this.add.text(16, 16, '', {
+      fontFamily: 'Cinzel',
+      fontSize: '20px',
+      color: '#ffffff'
+    });
+    
+    this.healthText = this.add.text(16, 46, '', {
+      fontFamily: 'Cinzel',
+      fontSize: '20px',
+      color: '#ffffff'
+    });
+    
+    this.waveText = this.add.text(GameConfig.width - 150, 16, '', {
+      fontFamily: 'Cinzel',
+      fontSize: '20px',
+      color: '#ffffff'
+    });
+    
+    this.updateHUD();
+  }
+
 
   create() {
     // Background
@@ -74,7 +126,10 @@ export default class GameScene extends Phaser.Scene {
 
   spawnNextWave() {
     const wave = WaveData[this.currentWave];
-    if (!wave) return;
+    if (!wave) {
+      this.handleVictory();
+      return;
+    }
 
     this.waveInProgress = true;
 
@@ -102,6 +157,33 @@ export default class GameScene extends Phaser.Scene {
     this.time.delayedCall(1000 * wave.enemies.length + 1000, () => {
       this.waveInProgress = false;
     });
+  }
+
+  handleVictory() {
+    this.scene.pause();
+    const victoryText = this.add.text(GameConfig.width/2, GameConfig.height/2, 'Victory!\nOlympus is Saved!', {
+      fontSize: '48px',
+      fill: '#fff',
+      align: 'center'
+    }).setOrigin(0.5);
+  }
+
+  handleDefeat() {
+    this.scene.pause();
+    const defeatText = this.add.text(GameConfig.width/2, GameConfig.height/2, 'Defeat!\nOlympus has Fallen!', {
+      fontSize: '48px',
+      fill: '#fff',
+      align: 'center'
+    }).setOrigin(0.5);
+  }
+
+  updatePlayerHealth(damage) {
+    this.playerHealth -= damage;
+    this.healthText.setText(`Health: ${this.playerHealth}`);
+
+    if (this.playerHealth <= 0) {
+      this.handleDefeat();
+    }
   }
 
   updateHUD() {

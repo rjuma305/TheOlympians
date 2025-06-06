@@ -53,10 +53,10 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('heart', '../assets/projectiles/heart.png');
 
     // Enemies
-    this.load.image('harpy', '../assets/sprites/harpy.png');
-    this.load.image('satyr', '../assets/sprites/satyr.png');
-    this.load.image('cyclops', '../assets/sprites/cyclops.png');
-    this.load.image('kampe', '../assets/sprites/kampe.png');
+    this.load.image('harpy', '../assets/enemies/harpy.png');
+    this.load.image('satyr', '../assets/enemies/satyr.png');
+    this.load.image('cyclops', '../assets/enemies/cyclops.png');
+    this.load.image('kampe', '../assets/enemies/kampe.png');
 
     // Background
     this.load.image('background', '../assets/maps/olympus_bg.png');
